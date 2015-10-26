@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	targetNamespace="http://www.siyuan.com/htmlExtractor" 
+	xmlns="http://www.siyuan.com/htmlExtractor" elementFormDefault="qualified">
+
+	<xs:element name="htmlExtractor">
+		<xs:complexType>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="bean" />
+				<xs:element ref="list" />
+				<xs:element ref="property" />
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="bean">
+		<xs:complexType>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="bean"></xs:element>
+				<xs:element ref="list"></xs:element>
+				<xs:element ref="property"></xs:element>
+				<xs:element ref="combine"></xs:element>
+			</xs:choice>
+			<xs:attributeGroup ref="extractor"/>
+        </xs:complexType>
+	</xs:element>
+	  
+	<xs:element name="list">
+		<xs:complexType>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="bean"></xs:element>
+				<xs:element ref="list"></xs:element>
+				<xs:element ref="property"></xs:element>
+				<xs:element ref="combine"></xs:element>
+			</xs:choice>
+			<xs:attributeGroup ref="extractor"/>
+			<xs:attribute name="elementType" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="property">
+		<xs:complexType>
+			<xs:attributeGroup ref="extractor">
+			     <xs:annotation>
+			         <xs:documentation><![CDATA[
+			             The supported type is [byte, char, short, int, long, float, double, boolean, 
+			             string, date] and [java.lang.Byte, java.lang.Character, java.lang.Short, 
+			             java.lang.Integer, java.lang.Long, java.lang.Float, java.lang.Double, 
+			             java.lang.Boolean, java.lang.String, java.util.Date]
+			         ]]></xs:documentation>
+			     </xs:annotation>
+			</xs:attributeGroup>
+			<xs:attribute name="index">
+				<xs:simpleType>
+					<xs:restriction base="xs:integer">
+						<xs:minInclusive value="0"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="value" type="xs:string"/>
+			<xs:attribute name="text" type="xs:boolean"/>
+			<xs:attribute name="format" type="xs:string"/>
+			<xs:attribute name="pattern" type="xs:string"/>
+			<xs:attribute name="group">
+			     <xs:simpleType>
+                    <xs:restriction base="xs:integer">
+                        <xs:minInclusive value="0"/>
+                    </xs:restriction>
+                </xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:attributeGroup name="extractor">
+		<xs:attribute name="name" type="xs:string"/>
+		<xs:attribute name="type" type="xs:string"/>
+		<xs:attribute name="selector" type="xs:string"/>
+	</xs:attributeGroup>
+	
+	<xs:element name="combine">
+		<xs:complexType>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="bean"></xs:element>
+				<xs:element ref="list"></xs:element>
+				<xs:element ref="property"></xs:element>
+				<xs:element ref="combine"></xs:element>
+			</xs:choice>
+			<xs:attribute name="selector" type="xs:string"></xs:attribute>
+		</xs:complexType>
+	</xs:element>
+				
+</xs:schema>

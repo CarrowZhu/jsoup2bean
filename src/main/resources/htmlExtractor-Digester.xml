@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE digester-rules PUBLIC
+  "-//Apache Commons //DTD digester-rules XML V1.0//EN"
+  "http://commons.apache.org/digester/dtds/digester-rules-3.0.dtd">
+<digester-rules>
+
+	<pattern value="htmlExtractor">
+		<object-create-rule classname="com.siyuan.jsoup2bean.HTMLExtractor" />
+	</pattern>
+
+	<pattern value="*/bean">
+		<object-create-rule classname="com.siyuan.jsoup2bean.BeanExtractor" />
+		<set-properties-rule />
+		<set-next-rule methodname="addExtractor" />
+	</pattern>
+
+	<pattern value="*/list">
+		<object-create-rule classname="com.siyuan.jsoup2bean.ListExtractor" />
+		<set-properties-rule />
+		<set-next-rule methodname="addExtractor" />
+	</pattern>
+
+	<pattern value="*/property">
+		<object-create-rule classname="com.siyuan.jsoup2bean.PrimitiveExtractor" />
+		<set-properties-rule />
+		<set-next-rule methodname="addExtractor" />
+	</pattern>
+	
+	<pattern value="*/combine">
+		<object-create-rule classname="com.siyuan.jsoup2bean.CombinedExtractor" />
+		<set-properties-rule />
+		<set-next-rule methodname="addExtractor" />
+	</pattern>
+	
+</digester-rules>

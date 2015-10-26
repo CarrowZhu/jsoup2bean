@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<htmlExtractor xmlns="http://www.siyuan.com/htmlExtractor" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://www.siyuan.com/htmlExtractor htmlExtractor.xsd ">
+    
+    <bean name="house" type="com.siyuan.entity.House">
+        <property name="title" selector="div.pagemain_saledetail div.house_slogan div.house_title h2"/>
+    	<combine selector="#detailconMainBase">
+    	    <property name="totalPrice" selector="span.color_f60" pattern="(.*)万" group="1"/>
+    	    <property name="price" selector="div.another_info span" pattern="单价：(.*)元/㎡" group="1"/>
+    	    <property name="roomCount" selector="ul div.clearfix span.fl" index="1" pattern="(.*)房(.*)厅" group="1"/>
+    	    <property name="livingCount" selector="ul div.clearfix span.fl" index="1" pattern="(.*)房(.*)厅" group="2"/>
+    	    <property name="area" selector="ul div.clearfix span.fl" index="3" pattern="(.*)㎡" group="1"/>
+    	    <property name="floor" selector="ul div.clearfix span.fl" index="5" pattern="(.*)层\s/(.*)层" group="2"/>
+    	    <property name="decoration" selector="ul div.clearfix span.fl" index="7" />
+    	    <property name="direction" selector="ul div.clearfix span.fl" index="9" />
+    	    <property name="type" selector="ul div.clearfix span.fl" index="11" />
+    	    <property name="bigArea" selector="ul div.clearfix span.fl" index="13" text="false" pattern="(.*)&amp;nbsp;(.*)" group="1"/>
+    	    <property name="smallArea" selector="ul div.clearfix span.fl" index="13" text="false" pattern="(.*)&amp;nbsp;(.*)" group="2"/>
+    	    <property name="buildTime" selector="ul div.clearfix span.fl" index="15" pattern="(.*)年" group="1" format="yyyy"/>
+    	</combine>
+    	<bean name="garden" type="com.siyuan.entity.Garden" selector="#detailconMainBase">
+    	    <property name="name" selector="ul div.clearfix span.fl" index="17"/>
+            <property name="address" selector="ul div.clearfix span.fl" index="19"/>
+    	</bean>
+    </bean>
+    
+</htmlExtractor>
