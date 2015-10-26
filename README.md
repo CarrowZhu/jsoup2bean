@@ -29,5 +29,5 @@ See the test cases in the test folders for detail.
 
 #Enum
 The jsoup2bean does not provide a way to extract Enum values from HTML as there is no suitable method 
-to convert the Enum descriptions into Enum. 
+to convert the Enum descriptions into Enum. <br/>
 You could simply extends the com.siyuan.jsoup2bean.PrimitiveExtractor to extract Enum values from HTML directly.
